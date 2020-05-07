@@ -8,6 +8,10 @@ public class Estoque {
 	List <Produto> listaProdutos = new ArrayList<Produto>();
 	List <Transacao> listaTransacoes = new ArrayList<Transacao>();
 	
+	public void setProduto(Produto novoProduto) {
+		this.listaProdutos.add(novoProduto);
+	}
+	
 	public int getIdProduto() {
 		return idProduto;
 	}
@@ -42,8 +46,10 @@ public class Estoque {
 	public String listarProdutos() {
 		String listaAuxiliar = "";
 		for (int i=0;i<listaProdutos.size();i++) {
-			listaAuxiliar = listaAuxiliar+listaProdutos.get(i).getIdProduto()+" - "+listaProdutos.get(i).getNomeProduto()+" - "+listaProdutos.get(i).getQuantidadeProduto();
+			listaAuxiliar = listaAuxiliar+listaProdutos.get(i).getIdProduto()+" - "+listaProdutos.get(i).getNomeProduto()+" - "+listaProdutos.get(i).getQuantidadeProduto()+"\n";
+			
 			}
+		System.out.println(listaAuxiliar);
 		return listaAuxiliar;
 		}
 	
@@ -54,21 +60,28 @@ public class Estoque {
 					produtoAuxiliar = listaProdutos.get(i);
 					}
 			}
-		if (produtoAuxiliar == null) {
-			System.out.println("Produto não encontrado! :(");
-			}
+		//if (produtoAuxiliar == null) {
+			//System.out.println("Produto não encontrado! :(");
+			//}
 		
 	return produtoAuxiliar;
 	}
 	
 	public void cadastrarProduto (String nomeProduto, int quantidadeProduto) {
 		Produto produtoAuxiliar = buscarProduto(nomeProduto);
+		Produto novoProduto = new Produto();
 		if (produtoAuxiliar == null) {
-			
-		}
+			idProduto++;
+			novoProduto.setNomeProduto(nomeProduto);
+			novoProduto.setQuantidadeProduto(quantidadeProduto);
+			novoProduto.setIdProduto(idProduto);
+			setProduto(novoProduto);
+			}
+		
 		
 		
 	}
 	
+
 
 }

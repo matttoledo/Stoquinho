@@ -4,6 +4,8 @@ public class Menu {
 	public static int op=0;
 public static void main (String[] args) {
 	
+	Estoque stoque = new Estoque();
+	
 	while(op!=9) {
         System.out.println("-------------MENU---------------------");
         System.out.println("|1: Cadastrar produto			|");
@@ -23,11 +25,21 @@ public static void main (String[] args) {
         switch (op) {
         case 1:
         	System.out.println("Digite o nome do produto que deseja cadastrar:");
+        	String nomeProduto = sc1.next();
+        	stoque.cadastrarProduto(nomeProduto,0);
+        	break;
         	
-        }
-        
+        case 6:
+        	stoque.listarProdutos();
+        	
 	}
-	clear();
+	}
+	
+	
+        	
+        	
+        
+	
 	
 	
 }

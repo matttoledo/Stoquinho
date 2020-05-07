@@ -2,8 +2,7 @@
 public class Produto {
 int quantidadeProduto;
 String nomeProduto;
-String idProduto;
-
+int idProduto;
 public int getQuantidadeProduto() {
 	return quantidadeProduto;
 }
@@ -16,11 +15,13 @@ public String getNomeProduto() {
 public void setNomeProduto(String nomeProduto) {
 	this.nomeProduto = nomeProduto;
 }
-public String getIdProduto() {
+public int getIdProduto() {
 	return idProduto;
 }
-public String setIdProduto(String idProduto) {
-	return idProduto;
+public void setIdProduto(int idProduto) {
+	this.idProduto = idProduto;
 }
+
+
 }
 
