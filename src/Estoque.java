@@ -56,15 +56,12 @@ public class Estoque {
 	public Produto buscarProduto (String nomeProduto) {
 		Produto produtoAuxiliar = null;
 		for (int i=0;i<listaProdutos.size();i++) {
-			if (nomeProduto==listaProdutos.get(i).getNomeProduto()) {
-					produtoAuxiliar = listaProdutos.get(i);
-					}
+			if (listaProdutos.get(i).getNomeProduto().equals(nomeProduto)) {
+					produtoAuxiliar = listaProdutos.get(i);					
+					return produtoAuxiliar;
+				}
 			}
-		//if (produtoAuxiliar == null) {
-			//System.out.println("Produto não encontrado! :(");
-			//}
-		
-	return produtoAuxiliar;
+		return null;
 	}
 	
 	public void cadastrarProduto (String nomeProduto, int quantidadeProduto) {
@@ -77,11 +74,52 @@ public class Estoque {
 			novoProduto.setIdProduto(idProduto);
 			setProduto(novoProduto);
 			}
-		
-		
+		}
+	
+	public int verificarProduto (String nomeProduto) {
+        for (Produto produto:listaProdutos) {
+            if (produto.getNomeProduto().toLowerCase().equals(nomeProduto.toLowerCase())) {
+                return listaProdutos.indexOf(produto);
+            }
+        }
+        return -1;
+ }
+
+	public void alterarProduto (String antigoProduto, String novoProduto) {
+	        int n = verificarProduto(antigoProduto);
+	        if (n>=0) {
+	            listaProdutos.get(verificarProduto(antigoProduto)).setNomeProduto(novoProduto);
+	        }
+	        else {
+	            System.out.println("Erro: Produto não cadastrado.");
+	        }
+	    }	
+	public void excluirProduto (String produtoVelho) {
+		int idProdutoVelho = verificarProduto(produtoVelho);
+		if(idProdutoVelho>=0) {
+			listaProdutos.remove(idProdutoVelho);
+			System.out.println("Produto removido com sucesso!");
+			
+		}
+		else {
+			System.out.println("Produto não cadastrado!");
+		}
 		
 	}
 	
+	public void adicionarEstoque (String aumentoProduto, int NovaQuantidadeProduto) {
+        int indiceProduto = verificarProduto(aumentoProduto);
+            if (indiceProduto>=0) {
+                NovaQuantidadeProduto = listaProdutos.get(indiceProduto).getQuantidadeProduto() + qtdNovaProduto;
+                listProduto.get(existirProduto(aumentoProduto)).setQtdProduto(qtdNovaProduto);
+                System.out.println("");
+                System.out.println("Quantidade adicionada com sucesso!");
+                }
+            else {
+                System.out.println("");
+                System.out.println("Ops! O produto atualmente não está cadastrado.");
+            }
 
-
+    }
 }
+
