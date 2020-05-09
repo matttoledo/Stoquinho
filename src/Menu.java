@@ -11,7 +11,7 @@ public static void main (String[] args) {
         System.out.println("|1: Cadastrar produto			|");
         System.out.println("|2: Alterar produto			|");
         System.out.println("|3: Excluir produto			|");
-        System.out.println("|4: Adicionar estoque			|");
+        System.out.println("|4: Acrescentar estoque			|");
         System.out.println("|5: Remover quantidade de estoque	|");
         System.out.println("|6: Listar estoque			|");
         System.out.println("|7: Fluxo de estoque			|");
@@ -48,14 +48,36 @@ public static void main (String[] args) {
         	break;
         
         case 4:
+        	System.out.println("Digite o nome do produto que deseja acrescentar o estoque:");
+        	String nomeProduto5=sc1.next();
+        	System.out.println("Digite a quantidade que deseja acrescentar:");
+        	int quantidadeProduto = sc1.nextInt();
+        	stoque.aumentarEstoque(nomeProduto5, quantidadeProduto);
+        	break;
         	
         	
+  
         case 5:
+        	System.out.println("Digite o nome do produto que deseja diminuir o estoque:");
+        	String nomeProduto6=sc1.next();
+        	System.out.println("Digite a quantidade que deseja acrescentar:");
+        	int quantidadeProduto2 = sc1.nextInt();
+        	stoque.diminuirEstoque(nomeProduto6, quantidadeProduto2);
+        	break;
         	
         case 6:
         	stoque.listarProdutos();
         	break; 	
-        	
+        
+        case 7:
+        	stoque.listarTransacoes();
+        	break;
+        
+        case 8:
+        	System.out.println("Digite o nome do produto para mostrar o histórico do mesmo:");
+        	String nomeProduto7=sc1.next();
+        	stoque.listarHistorico(nomeProduto7);
+        	break;
         	
 	}
 	}

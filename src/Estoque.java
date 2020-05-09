@@ -107,11 +107,11 @@ public class Estoque {
 		
 	}
 	
-	public void adicionarEstoque (String aumentoProduto, int NovaQuantidadeProduto) {
+	public void adicionarEstoque (String aumentoProduto, int novaQuantidadeProduto) {
         int indiceProduto = verificarProduto(aumentoProduto);
             if (indiceProduto>=0) {
-                NovaQuantidadeProduto = listaProdutos.get(indiceProduto).getQuantidadeProduto() + qtdNovaProduto;
-                listProduto.get(existirProduto(aumentoProduto)).setQtdProduto(qtdNovaProduto);
+                novaQuantidadeProduto = listaProdutos.get(indiceProduto).getQuantidadeProduto() + novaQuantidadeProduto;
+                listaProdutos.get(verificarProduto(aumentoProduto)).setQuantidadeProduto(novaQuantidadeProduto);
                 System.out.println("");
                 System.out.println("Quantidade adicionada com sucesso!");
                 }
@@ -121,5 +121,53 @@ public class Estoque {
             }
 
     }
+	public void aumentarEstoque (String nomeProduto, int quantidadeProduto ) {
+		int idProduto = verificarProduto(nomeProduto);
+		if (idProduto >=0) {
+			int quantidadeNovaProduto = listaProdutos.get(idProduto).getQuantidadeProduto()+ quantidadeProduto;
+			listaProdutos.get(idProduto).setQuantidadeProduto(quantidadeNovaProduto);
+			System.out.println("Quantidade alterada com sucesso!");
+			}
+		adicionarTransacao("Entrada",nomeProduto, quantidadeProduto);
+	}
+	
+	public void diminuirEstoque (String nomeProduto, int quantidadeProduto ) {
+		int idProduto = verificarProduto(nomeProduto);
+		if (idProduto >=0) {
+			int quantidadeNovaProduto = listaProdutos.get(idProduto).getQuantidadeProduto()- quantidadeProduto;
+			listaProdutos.get(idProduto).setQuantidadeProduto(quantidadeNovaProduto);
+			System.out.println("Quantidade alterada com sucesso!");
+			}
+		adicionarTransacao("Saida",nomeProduto, quantidadeProduto);
+	}
+
+	public void adicionarTransacao (String tipoTransacao, String nomeProduto, int quantidadeProduto) {
+		Transacao transacao = new Transacao();
+		idTransacao++;
+		transacao.setNomeProduto(nomeProduto);
+		transacao.setidTransacao(idTransacao);
+		transacao.setquantidadeTransacao(quantidadeProduto);
+		transacao.settipoTransacao(tipoTransacao);
+		listaTransacoes.add(transacao);
+}
+
+	public String listarTransacoes() {
+		String listaAuxiliar = "";
+		for (int i=0;i<listaTransacoes.size();i++) {
+			listaAuxiliar = listaAuxiliar+listaTransacoes.get(i).getidTransacao()+" - "+listaTransacoes.get(i).getNomeProduto()+" - "+listaTransacoes.get(i).getquantidadeTransacao()+"\n";
+			
+			}
+		System.out.println(listaAuxiliar);
+		return listaAuxiliar;
+		}
+	public String listarHistorico(String nomeProduto) {
+		String listaAuxiliar = "";
+		for (Transacao transacao:listaTransacoes) {
+				if (transacao.getNomeProduto().toLowerCase().equals(nomeProduto.toLowerCase()))
+				listaAuxiliar = listaAuxiliar+transacao.getidTransacao()+" - "+transacao.getNomeProduto()+" - "+transacao.getquantidadeTransacao()+"\n";
+				}
+		System.out.println(listaAuxiliar);
+		return listaAuxiliar;
+		}
 }
 
